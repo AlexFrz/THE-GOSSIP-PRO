@@ -11,26 +11,44 @@
 <%# end %>
 
 <!-- Main content -->
+
+<%= render partial: 'partials/heading' %>
+<%= render partial: 'partials/footer'%>
+
 <div class="row">
   <% @gossips.each do |gossip| %>
-    <div class="col-4 mb-3">
-      <div class="card">
-        <img class="card-img-top" alt="Card image cap" src="https://actu.meilleurmobile.com/wp-content/uploads/2015/06/gossip-application.jpg">
-        <div class="card-body">
-          <h5 class="card-title"><%=gossip.title %></h5>
-          <p class="card-text"><%= truncate gossip.content, length: 30 %></p>
-          <p class="card-text">
-            <small class="text-muted">
-              posté par <a href="<%= user_path(gossip.user.id) %>"><%=gossip.user.first_name %></a>
-              le <%=gossip.created_at.strftime("%d/%m/%Y %H:%I") %>
-            </small>
-          </p>
-          <a type="button" class="btn btn-primary btn-block" href="<%=gossip_path(gossip.id) %>">Voir le potin</a>
-          <%= form_tag gossip_path(gossip.id), method: "delete", style: "display: inline" do %>
-            <%= submit_tag "Supprimer" %>
-          <% end %>
-        </div>
+  
+  <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%=gossip.title %></h5>
+                <p class="card-text"><%= truncate gossip.content, length: 30 %></p>
+        <p class="card-text">
+
+        <a href="<%=gossip_path(gossip.id) %>" class="btn btn-danger">See the gossip</a>
+ 
       </div>
     </div>
-  <% end %>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%=gossip.title %></h5>
+                <p class="card-text"><%= truncate gossip.content, length: 30 %></p>
+        <p class="card-text">
+
+        <a href="<%= gossip_path(gossip.id) %>" class="btn btn-danger">See the gossip</a>
+ 
+      </div>
+    </div>
+  </div>
 </div>
+  <% end %>
+
+<footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Bye, and thanks for the visit, muh'fucker.</p>
+        </div>
+      </footer>
