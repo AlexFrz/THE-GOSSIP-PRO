@@ -1,0 +1,36 @@
+<!-- Display errors -->
+<%# if @gossip.errors.any? %>
+<!--  <div class="alert alert-success" role="alert">-->
+<!--    <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>-->
+<!--    <ul>-->
+      <%# @gossip.errors.full_messages.each do |message| %>
+<!--        <li><%#= message %></li>-->
+      <%# end %>
+<!--    </ul>-->
+<!--  </div>-->
+<%# end %>
+
+<!-- Main content -->
+<div class="row">
+  <% @gossips.each do |gossip| %>
+    <div class="col-4 mb-3">
+      <div class="card">
+        <img class="card-img-top" alt="Card image cap" src="https://actu.meilleurmobile.com/wp-content/uploads/2015/06/gossip-application.jpg">
+        <div class="card-body">
+          <h5 class="card-title"><%=gossip.title %></h5>
+          <p class="card-text"><%= truncate gossip.content, length: 30 %></p>
+          <p class="card-text">
+            <small class="text-muted">
+              posté par <a href="<%= user_path(gossip.user.id) %>"><%=gossip.user.first_name %></a>
+              le <%=gossip.created_at.strftime("%d/%m/%Y %H:%I") %>
+            </small>
+          </p>
+          <a type="button" class="btn btn-primary btn-block" href="<%=gossip_path(gossip.id) %>">Voir le potin</a>
+          <%= form_tag gossip_path(gossip.id), method: "delete", style: "display: inline" do %>
+            <%= submit_tag "Supprimer" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
