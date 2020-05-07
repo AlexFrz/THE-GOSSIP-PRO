@@ -30,12 +30,21 @@ class GossipsController < ApplicationController
 
   # Display a view with a form to edit an existing gossip
   def edit
-
+    @gossip = Gossip.find(params[:id])
   end
 
   # Edit an existing gossip
   def update
-
+    def update
+      @gossip = Gossip.find(params[:id])
+      gossip_params = params.require(:gossip).permit(:title, :content, :user)
+      @gossip.update(gossip_params)
+      if @gossip.update(gossip_params)
+        redirect_to @gossip
+      else
+        render :edit
+      end
+    end
   end
 
   # Delete a gossip

@@ -11,6 +11,7 @@
             posté par <a href="<%= user_path(@gossip.user.id) %>"><%=@gossip.user.first_name %></a>
             le <%=@gossip.created_at.strftime("%d/%m/%Y à %H:%I") %>
           </small>
+          <a href="<%= edit_gossip_path(@gossip.id)%>" class="btn btn-info">Editer</a>
         </p>
       </div>
     </div>
